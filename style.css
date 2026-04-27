@@ -1,0 +1,66 @@
+:root{
+    --cor-fundo:#254a8d;
+    --cor-fundo-2:#143561;
+    --cor-forms:#bbbec3;
+    --cor-texto:#ffffff;
+    --cor-erro:#ca0000;
+    --cor-sucesso:#00bd09;
+}
+
+*{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+body{
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+}
+
+.card{
+    background-color: var(--cor-fundo-2);
+    border: none;
+    border-radius: 15px;
+}
+
+.form-control{
+    background-color: var(--cor-forms);
+    border: none;
+}
+
+.form-control:focus{
+    box-shadow: none;
+    border: 2px solid var(--cor-texto);
+}
+
+.btn-primary{
+    background-color: var(--cor-fundo);
+    border: none;
+}
+
+.btn-primary:hover{
+    background-color: #1b3a6d;
+}
+
+#toggle{
+    cursor: pointer;
+    color: var(--cor-texto);
+    text-decoration: underline;
+}
+
+.alert-danger{
+    background-color: var(--cor-erro);
+    color: white;
+    border: none;
+}
+
+.alert-success{
+    background-color: var(--cor-sucesso);
+    color: white;
+    border: none;
+}
+
+.alert-warning{
+    background-color: #ffc107;
+    color: black;
+    border: none;
+}
