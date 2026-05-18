@@ -1,71 +1,87 @@
-:root{
-    --cor-fundo:#254a8d;
-    --cor-fundo-2:#143561;
-    --cor-forms:#bbbec3;
-    --cor-texto:#ffffff;
-    --cor-erro:#ca0000;
-    --cor-sucesso:#00bd09;
-}
+#body-presentation {
+            background-color: #080810;
+            color: #e8ddd0;
+        }
 
-*{
-    font-family: Georgia, 'Times New Roman', Times, serif;
-}
+        #navbar-main {
+            background-color: #060608 !important;
+            border-bottom: 1px solid rgba(192, 57, 43, 0.4);
+        }
 
-body{
-    background-color: var(--cor-fundo);
-    color: var(--cor-texto);
-    background-image: url(assets/estrela-da-morte);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
+        #dropdown-menu {
+            background-color: #130a0a;
+            border: 1px solid rgba(192, 57, 43, 0.35);
+        }
 
-.card{
-    background-color: var(--cor-fundo-2);
-    border: none;
-    border-radius: 15px;
-}
+        #dropdown-menu .dropdown-item {
+            color: #c8b8a8;
+        }
 
-.form-control{
-    background-color: var(--cor-forms);
-    border: none;
-}
+        #dropdown-menu .dropdown-item:hover {
+            background-color: rgba(192, 57, 43, 0.2);
+            color: #c9a84c;
+        }
 
-.form-control:focus{
-    box-shadow: none;
-    border: 2px solid var(--cor-texto);
-}
+        #btn-search {
+            background-color: #8b0000;
+            color: #e8ddd0;
+            border: 1px solid #c0392b;
+        }
 
-.btn-primary{
-    background-color: var(--cor-fundo);
-    border: none;
-}
+        #btn-search:hover {
+            background-color: #c0392b;
+            color: #ffffff;
+        }
 
-.btn-primary:hover{
-    background-color: #1b3a6d;
-}
+        #img-placeholder {
+            min-height: 460px;
+            border: 1px dashed rgba(192, 57, 43, 0.35);
+            border-radius: 6px;
+            background-color: #110808;
+            color: #4a2a2a;
+            font-size: 0.8rem;
+            letter-spacing: 0.12em;
+        }
 
-#toggle{
-    cursor: pointer;
-    color: var(--cor-texto);
-    text-decoration: underline;
-}
+        #text-box h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #e8ddd0;
+        }
 
-.alert-danger{
-    background-color: var(--cor-erro);
-    color: white;
-    border: none;
-}
+        #name-highlight {
+            color: #c0392b;
+        }
 
-.alert-success{
-    background-color: var(--cor-sucesso);
-    color: white;
-    border: none;
-}
+        #title-divider {
+            border-color: #c0392b;
+            opacity: 0.5;
+            width: 80px;
+            margin-left: 0;
+        }
 
-.alert-warning{
-    background-color: #ffc107;
-    color: black;
-    border: none;
-}
+        #text-box p {
+            color: #c8b8a8;
+            line-height: 1.85;
+        }
 
+        #curiosidades-card {
+            background-color: rgba(15, 10, 10, 0.9);
+            border: 1px solid rgba(192, 57, 43, 0.4);
+        }
+
+        #card-header {
+            background-color: #8b0000;
+            color: #e8ddd0;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            border-bottom: 1px solid #c0392b;
+        }
+
+        #curiosidades-list .list-group-item {
+            background-color: transparent;
+            border-color: rgba(192, 57, 43, 0.2);
+            color: #b8a898;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
