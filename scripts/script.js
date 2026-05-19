@@ -1,92 +1,126 @@
-let cadastro = false;
+let topoVisivel = false;
 
-const titulo = document.querySelector("h2");
-const botao = document.getElementById("botao-envio");
-const toggle = document.getElementById("toggle");
-const mensagem = document.getElementById("mensagem");
-const form = document.getElementById("form-login");
 
-toggle.onclick = () => {
+const inputSearch = document.querySelector(".form-control[type='search']");
+const btnSearch   = document.getElementById("btn-search");
+const navbarForm  = document.querySelector(".d-flex");
+const btnTopo     = document.getElementById("btn-topo");
+const todosCards  = document.querySelectorAll(".curio-card, .card-obra");
+const imgBlocks   = document.querySelectorAll(".img-block");
+const sections    = document.querySelectorAll("section");
+const dropItems   = document.querySelectorAll(".dropdown-item");
 
-    cadastro = !cadastro;
 
-    titulo.innerText = cadastro ? "Cadastro" : "Login";
-    botao.innerText = cadastro ? "Cadastrar" : "Entrar";
-    toggle.innerText = cadastro 
-        ? "Já tem conta? Faça login!" 
-        : "Não tem conta? Cadastre-se!";
-
-    mensagem.innerHTML = "";
-}
-
-form.onsubmit = (e) => {
+btnSearch.onclick = (e) => {
     e.preventDefault();
 
-    let email = document.getElementById("email");
-    let senha = document.getElementById("senha");
+    inputSearch.classList.remove("is-invalid", "is-valid");
 
-    mensagem.innerHTML = "";
+    if (inputSearch.value.trim() === "" || inputSearch.value.trim().length < 3) {
+        inputSearch.classList.add("is-invalid");
 
-   
-    email.classList.remove("is-invalid", "is-valid");
-    senha.classList.remove("is-invalid", "is-valid");
-
-   
-    if (!email.value.includes("@") || !email.value.includes(".")) {
-        email.classList.add("is-invalid");
-
-        mensagem.innerHTML = `
-            <div class="alert alert-danger mt-3" role="alert">
-                Email inválido!
+        navbarForm.innerHTML += `
+            <div class="alert alert-danger mt-2 p-1 px-2 small" id="msg-search" role="alert">
+                Mínimo de 3 caracteres.
             </div>
         `;
         return;
-    } else {
-        email.classList.add("is-valid");
     }
 
-    
-    if (senha.value.length < 5) {
-        senha.classList.add("is-invalid");
+    if (inputSearch.value.trim().length > 60) {
+        inputSearch.classList.add("is-invalid");
 
-        mensagem.innerHTML = `
-            <div class="alert alert-warning mt-3" role="alert">
-                Senha muito curta!
+        navbarForm.innerHTML += `
+            <div class="alert alert-danger mt-2 p-1 px-2 small" id="msg-search" role="alert">
+                Máximo de 60 caracteres.
             </div>
         `;
         return;
-    } else {
-        senha.classList.add("is-valid");
     }
 
-    if (cadastro) {
-        localStorage.setItem(email.value, senha.value);
+    inputSearch.classList.add("is-valid");
 
-        mensagem.innerHTML = `
-            <div class="alert alert-success mt-3" role="alert">
-                Cadastro realizado com sucesso!
-            </div>
-        `;
-    } else {
-        let salva = localStorage.getItem(email.value);
+    navbarForm.innerHTML += `
+        <div class="alert alert-success mt-2 p-1 px-2 small" id="msg-search" role="alert">
+            Pesquisando por: "${inputSearch.value.trim()}"
+        </div>
+    `;
+}
 
-        if (salva === senha.value) {
-            mensagem.innerHTML = `
-                <div class="alert alert-success mt-3" role="alert">
-                    Login realizado com sucesso!
-                </div>
-            `;
-        } else {
-            mensagem.innerHTML = `
-                <div class="alert alert-danger mt-3" role="alert">
-                    Dados incorretos!
-                </div>
-            `;
+inputSearch.oninput = () => {
+    inputSearch.classList.remove("is-invalid", "is-valid");
+
+    let msgAnterior = document.getElementById("msg-search");
+    if (msgAnterior) msgAnterior.remove();
+}
+
+
+dropItems.forEach((item) => {
+    item.onclick = (e) => {
+        const href = item.getAttribute("href");
+
+        if (href && href.startsWith("#") && href !== "#") {
+            e.preventDefault();
+
+            const alvo = document.querySelector(href);
+            if (alvo) alvo.scrollIntoView({ behavior: "smooth", block: "start" });
         }
     }
+});
 
-    form.reset();
 
-    email.classList.remove("is-valid");
-    senha.classList.remove("is-valid");
-};
+const fadeObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity   = "1";
+            entry.target.style.transform = "translateY(0)";
+            fadeObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.1 });
+
+sections.forEach((section) => {
+    section.style.opacity    = "0";
+    section.style.transform  = "translateY(24px)";
+    section.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+    fadeObserver.observe(section);
+});
+
+
+window.onscroll = () => {
+    topoVisivel = window.scrollY > 300;
+    btnTopo.style.display = topoVisivel ? "block" : "none";
+}
+
+btnTopo.onclick = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+
+imgBlocks.forEach((bloco) => {
+    bloco.onclick = () => {
+        bloco.style.borderColor     = "#c0392b";
+        bloco.style.backgroundColor = "#1a0000";
+        bloco.textContent           = "Clique aqui para adicionar uma imagem";
+
+        setTimeout(() => {
+            bloco.style.borderColor     = "#8b0000";
+            bloco.style.backgroundColor = "#0d0000";
+        }, 1500);
+    }
+})
+
+
+todosCards.forEach((card) => {
+    card.style.transition = "transform 0.2s, border-color 0.2s";
+
+    card.onmouseenter = () => {
+        card.style.transform   = "translateY(-4px)";
+        card.style.borderColor = "#c0392b";
+    }
+
+    card.onmouseleave = () => {
+        card.style.transform   = "translateY(0)";
+        card.style.borderColor = "#5a1010";
+    }
+});
